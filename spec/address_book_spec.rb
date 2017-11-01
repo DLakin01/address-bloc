@@ -42,4 +42,36 @@ RSpec.describe AddressBook do
 
   end
 
+  describe "#remove_entry" do
+
+    it "removes just one entry" do
+      book = AddressBook.new
+      book.entries = [
+          ['Daniel Lakin', '919-475-3122', 'DLakin01@gmail.com'],
+          ['Taylor Kuether', '111.222.3333', 'taylor.kuether@gmail.com'],
+          ['Zach Zimbler', '444.555.6666', 'zzimbler@gmail.com'],
+          ['Mark Carpenter', '123.456.7890', 'mark.carpenter@gmail.com']
+        ]
+      book.remove_entry('Zach Zimbler', '444.555.6666', 'zzimbler@gmail.com')
+      expect(book.entries.size).to eq(3)
+    end
+
+    it "removes the correct information from entries" do
+      book = AddressBook.new
+      book.entries = [
+          ['Daniel Lakin', '919-475-3122', 'DLakin01@gmail.com'],
+          ['Taylor Kuether', '111.222.3333', 'taylor.kuether@gmail.com'],
+          ['Zach Zimbler', '444.555.6666', 'zzimbler@gmail.com'],
+          ['Mark Carpenter', '123.456.7890', 'mark.carpenter@gmail.com']
+      ]
+      book.remove_entry('Zach Zimbler', '444.555.6666', 'zzimbler@gmail.com')
+      expect(book.entries).to eq([
+        ['Daniel Lakin', '919-475-3122', 'DLakin01@gmail.com'],
+        ['Taylor Kuether', '111.222.3333', 'taylor.kuether@gmail.com'],
+        ['Mark Carpenter', '123.456.7890', 'mark.carpenter@gmail.com']
+      ])
+    end
+
+  end
+
 end
