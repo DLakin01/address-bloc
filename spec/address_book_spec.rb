@@ -54,6 +54,12 @@ RSpec.describe AddressBook do
       expect(book_size).to eq 5
     end
 
+    it "can import other files" do
+      book.import_from_csv("entries2.csv")
+      entry_three = book.entries[2]
+      check_entry(entry_three, "The Devil", "666-666-6666", "satanhimself@hell.com")
+    end
+
     it "imports the 1st entry" do
       book.import_from_csv("entries.csv")
       # Check the first entry
