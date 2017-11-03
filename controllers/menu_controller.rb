@@ -13,7 +13,8 @@ class MenuController
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
-    puts "5 - Exit"
+    puts "5 - NUKE ALL ENTRIES"
+    puts "6 - Exit"
     print "Enter your selection: "
 
     selection = gets.to_i
@@ -35,6 +36,10 @@ class MenuController
         read_csv
         main_menu
       when 5
+        system "clear"
+        nuke_entries
+        main_menu
+      when 6
         print "\nGood-bye!\n\n"
         exit(0)
       else
@@ -181,6 +186,53 @@ class MenuController
       puts entry
     end
     view_all_entries
+  end
+
+  def nuke_entries
+    if address_book.entries.empty?
+      puts "Uhh, boss? There aren't any entries to destroy right now."
+      puts "---------------------------------------------------------"
+      main_menu
+    else
+      puts "Are you sure you want to do this? You could destroy all entries as we know them. Y/N"
+      answer = gets.chomp.downcase
+
+      case answer
+        when "y"
+          system "clear"
+          puts "Fire when ready. I hope you're happy with yourself."
+          puts "---------------------------------------------------"
+          puts "                               ________________
+                          ____/ (  (    )   )  ___
+                         /( (  (  )   _    ))  )   )|
+                       ((     (   )(    )  )   (   )  )
+                     ((/  ( _(   )   (   _) ) (  () )  )
+                    ( (  ( (_)   ((    (   )  .((_ ) .  )_
+                   ( (  )    (      (  )    )   ) . ) (   )
+                  (  (   (  (   ) (  _  ( _) ).  ) . ) ) ( )
+                  ( (  (   ) (  )   (  ))     ) _)(   )  )  )
+                 ( (  ( / ) (    (_  ( ) ( )  )   ) )  )) ( )
+                  (  (   (  (   (_ ( ) ( _    )  ) (  )  )   )
+                 ( (  ( (  (  )     (_  )  ) )  _)   ) _( ( )
+                  ((  (   )(    (     _    )   _) _(_ (  (_ )
+                   (_((__(_(__(( ( ( |  ) ) ) )_))__))_)___)
+                   ((__)        //||lll|l||///          /_))
+                            (   |(/ (  )  ) )|   )
+                          (    ( ( ( | | ) ) )|   )
+                           (   /(| / ( )) ) ) )) )
+                         (     ( ((((_(|)_)))))     )
+                          (      |||(|(|)|/||     )
+                        (        |(||(||)||||        )
+                          (     //|/l|||)||| |     )
+                        (/ / //  /|//||||///  | |  | _)"
+          address_book.entries.clear
+        when "n"
+          system "clear"
+          puts "Phew. I'm glad you saw reason."
+          puts "------------------------------"
+          main_menu
+      end
+    end
   end
 
   def entry_submenu
